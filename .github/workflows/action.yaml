@@ -7,7 +7,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - name: build
-      run: docker build -t andrykar/todolist-server:$GITHUB_REF_NAME-$GITHUB_RUN_ID ../todolist
+      run: docker build -t andrykar/todolist-server:$GITHUB_REF_NAME-$GITHUB_RUN_ID ./todolist/Dockerfile
     - name: login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
     - name: push
