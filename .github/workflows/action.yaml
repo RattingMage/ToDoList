@@ -23,17 +23,8 @@ jobs:
           mkdir deploy
           cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
           cat .env | envsubst > deploy/.env
-      - name: run docker-compose
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.SERVER_HOST }}
-            username: ${{ secrets.SERVER_USER }}
-            password: ${{ secrets.SERVER_PASSWORD }}
-            script: |
-              cd todolist-server
-              echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
       - name: copy files
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
@@ -41,3 +32,12 @@ jobs:
           source: "deploy/docker-compose.yaml, deploy/.env"
           target: "todolist-server"
           strip_components: 1
+      - name: run docker-compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd todolist-server
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker-compose up -d
