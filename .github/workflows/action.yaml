@@ -42,4 +42,6 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           script: |
             cd todolist-server
+            cat docker-compose-ci.yaml > docker-compose.yaml
+            rm docker-compose-ci.yaml
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker-compose up -d
