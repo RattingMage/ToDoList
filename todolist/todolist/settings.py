@@ -90,7 +90,6 @@ DATABASES = {
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
-    #'default': dj_database_url.config(default=env('DATABASE_URL'))
 }
 
 # Password validation
