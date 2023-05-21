@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           script: |
             cd todolist-server
-            cat docker-compose-ci.yaml > docker-compose.yaml
+            cat docker-compose-ci.yaml | envsubst > docker-compose.yaml
             rm docker-compose-ci.yaml
             docker-compose down
             docker-compose up -d
