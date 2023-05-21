@@ -14,7 +14,7 @@ services:
       - "5432:5432"
 
   api:
-    image: andrykar/todolist-server:latest
+    image: andrykar/todolist-server:{$GITHUB_REF_NAME}-{$GITHUB_RUN_ID}
     env_file:
       - ./.env
     ports:
@@ -31,7 +31,7 @@ services:
       - postgres
       - api
   migration:
-    image: andrykar/todolist-server:latest
+    image: andrykar/todolist-server:{$GITHUB_REF_NAME}-{$GITHUB_RUN_ID}
     command: python manage.py migrate --noinput
     volumes:
       - .:/code
