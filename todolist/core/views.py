@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics, permissions
 
-from todolist.core.serializers import RegistrationSerializer
+from core.serializers import RegistrationSerializer
 
 USER_MODEL = get_user_model()
 

@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     image: api
     env_file:
-      - ./.env
+      - ./.env.dev
     ports:
       - "8000:8000"
     depends_on:
@@ -27,9 +27,7 @@ services:
     volumes:
       - .:/code
   front:
-    build:
-      context: ../todo-list-frontend
-      dockerfile: docker/Dockerfile
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "80:80"
     depends_on:
