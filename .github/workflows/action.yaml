@@ -31,7 +31,7 @@ jobs:
       - name: render config
         run: |
           mkdir deploy
-          cat todolist/docker-compose-ci.yaml | envsubst > deploy/docker-compose-ci.yaml
+          cat todolist/docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
           cat .env | envsubst > deploy/.env
       - name: copy files
         uses: appleboy/scp-action@master
@@ -52,8 +52,5 @@ jobs:
           key: ${{ secrets.SERVER_KEY }}
           script: |
             cd todolist-server
-            cat docker-compose-ci.yaml
-            cat docker-compose-ci.yaml > docker-compose.yaml
-            rm docker-compose-ci.yaml
             docker-compose down
             docker-compose up -d
