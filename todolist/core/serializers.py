@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, AuthenticationFailed
 
 USER_MODEL = get_user_model()
 
@@ -39,5 +39,22 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data) -> USER_MODEL:
         del validated_data['password_repeat']
-        validated_data['password'] = make_password(validate_password['password'])
+        validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
+
+    def create(self, validated_data):
+        if not (user := authenticate(
+            username=validated_data['username'],
+            password=validated_data['password']
+        )):
+            raise AuthenticationFailed
+        return user
+
+    class Meta:
+        model=USER_MODEL
+        fields='__all__'
