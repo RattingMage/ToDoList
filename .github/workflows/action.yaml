@@ -33,8 +33,8 @@ jobs:
       - name: render config
         run: |
           mkdir deploy
-          cat todolist/docker-compose-ci.yaml | envsubst > docker-compose.yaml
-          cat todolist/.env | envsubst > .env
+          cat todolist/docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
+          cat todolist/.env | envsubst > deploy/.env
       - name: copy files
         uses: appleboy/scp-action@master
         with:
@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           key: ${{ secrets.SERVER_KEY }}
-          source: "docker-compose.yaml,.env"
+          source: "todolist/docker-compose-ci.yaml,todolist/.env"
           target: "todolist-server"
           strip_components: 1
       - name: run docker-compose
