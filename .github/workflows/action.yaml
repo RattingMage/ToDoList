@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           key: ${{ secrets.SERVER_KEY }}
-          source: "todolist/docker-compose-ci.yaml,todolist/.env"
+          source: "todolist/docker-compose.yaml,todolist/.env"
           target: "todolist-server"
           strip_components: 1
       - name: run docker-compose
