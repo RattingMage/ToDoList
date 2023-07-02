@@ -28,6 +28,8 @@ jobs:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
           SQL_HOST: ${{ secrets.SQL_HOST }}
           SQL_PORT: ${{ secrets.SQL_PORT }}
+          SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ SOCIAL_AUTH_VK_OAUTH2_KEY }}
+          SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ SOCIAL_AUTH_VK_OAUTH2_SECRET }}
       - name: render config
         run: |
           mkdir deploy
