@@ -30,6 +30,7 @@ jobs:
           SQL_PORT: ${{ secrets.SQL_PORT }}
           SOCIAL_AUTH_VK_OAUTH2_KEY: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_KEY }}
           SOCIAL_AUTH_VK_OAUTH2_SECRET: ${{ secrets.SOCIAL_AUTH_VK_OAUTH2_SECRET }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: render config
         run: |
           mkdir deploy

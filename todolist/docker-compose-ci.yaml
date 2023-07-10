@@ -23,6 +23,15 @@ services:
       - postgres
     volumes:
       - .:/code
+
+  bot:
+    image: andrykar/todolist-server:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres
+    command: python manage.py runbot
+
   front:
     image: sermalenk/skypro-front:lesson-38
     ports:
